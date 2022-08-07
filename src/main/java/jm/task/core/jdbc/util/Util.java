@@ -1,5 +1,12 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
+import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 import java.sql.*;
 
 public class Util {
@@ -7,18 +14,31 @@ public class Util {
     public static final String USER_NAME = "root";
     public static final String PASSWORD = "XshOhzqAp3oM";
     public static final String URL = "jdbc:mysql://localhost:3306/mysql";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static Connection connection;
+    private static SessionFactory sessionFactory = null;
 
-    public static Connection getConnection() {
+    public static SessionFactory getConnection() {
 
         try {
-            //Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+            Configuration configuration = new Configuration()
+                    .setProperty("hibernate.connection.driver_class", DRIVER)
+                    .setProperty("hibernate.connection.url", URL)
+                    .setProperty("hibernate.connection.username", USER_NAME)
+                    .setProperty("hibernate.connection.password", PASSWORD)
+                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+                    .addAnnotatedClass(User.class)
+                    .setProperty("hibernate.c3p0.min_size","5")
+                    .setProperty("hibernate.c3p0.max_size","200")
+                    .setProperty("hibernate.c3p0.max_statements","200");
 
-        return connection;
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(configuration.getProperties()).build();
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        return sessionFactory;
     }
 
 }

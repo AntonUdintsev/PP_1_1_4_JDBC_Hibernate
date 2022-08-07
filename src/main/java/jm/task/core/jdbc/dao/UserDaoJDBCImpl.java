@@ -8,7 +8,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private static final Connection connection = Util.getConnection();
+    @Override
+    public void createUsersTable() {
+
+    }
+
+    @Override
+    public void dropUsersTable() {
+
+    }
+
+    @Override
+    public void saveUser(String name, String lastName, byte age) {
+
+    }
+
+    @Override
+    public void removeUserById(long id) {
+
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public void cleanUsersTable() {
+
+    }
+/*    private static final Connection connection = Util.getConnection();
 
     public UserDaoJDBCImpl() {
     }
@@ -77,4 +106,6 @@ public class UserDaoJDBCImpl implements UserDao {
             e.printStackTrace();
         }
     }
+
+ */
 }

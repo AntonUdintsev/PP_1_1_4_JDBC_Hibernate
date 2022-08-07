@@ -13,17 +13,17 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         // реализуйте алгоритм здесь
-UserServiceImpl usd = new UserServiceImpl();
-usd.createUsersTable();
-usd.saveUser("name1","lastname1",(byte) 12);
-usd.saveUser("name1","lastname1",(byte) 12);
-usd.saveUser("name1","lastname1",(byte) 12);
-usd.saveUser("name1","lastname1",(byte) 12);
-usd.getAllUsers();
-usd.cleanUsersTable();
-usd.dropUsersTable();
+        UserServiceImpl usd = new UserServiceImpl();
+        usd.createUsersTable();
+        usd.saveUser("name1", "lastname1", (byte) 12);
+        usd.saveUser("name1", "lastname1", (byte) 12);
+        usd.saveUser("name1", "lastname1", (byte) 12);
+        usd.saveUser("name1", "lastname1", (byte) 12);
+        usd.getAllUsers();
+        usd.cleanUsersTable();
+        usd.dropUsersTable();
 
 
     }
